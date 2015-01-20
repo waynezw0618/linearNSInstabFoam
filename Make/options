@@ -1,0 +1,26 @@
+sinclude $(GENERAL_RULES)/mplib$(WM_MPLIB)
+sinclude $(RULES)/mplib$(WM_MPLIB)
+
+c++WARN = -Wall -Wno-unused-parameter
+
+EXE_INC = \
+     $(PFLAGS) $(PINC) \
+    -I$(LIB_SRC)/turbulenceModels/incompressible/turbulenceModel \
+    -I$(LIB_SRC)/transportModels \
+    -I$(LIB_SRC)/transportModels/incompressible/singlePhaseTransportModel \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(PETSC_DIR)/include \
+    -I$(PETSC_DIR)/$(PETSC_ARCH)/include \
+    -I$(SLEPC_DIR)/include \
+    -I$(SLEPC_DIR)/$(SLEPC_ARCH)/include
+
+EXE_LIBS = \
+    -L$(MPI_ARCH_PATH)/lib -lmpi \
+    -lincompressibleTurbulenceModel \
+    -lincompressibleRASModels \
+    -lincompressibleLESModels \
+    -lincompressibleTransportModels \
+    -lfiniteVolume \
+    -lmeshTools \
+    -L$(PETSC_DIR)/$(PETSC_ARCH)/lib -lpetsc \
+    -L$(SLEPC_DIR)/$(SLEPC_ARCH)/lib -lslepc
